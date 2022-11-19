@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spannable_grid/spannable_grid.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,9 +30,62 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex = 0;
+  int itemount = 0;
+
   final screens = [
-    Center(child: Text('Hello')),
-    Center(child: Text('About')),
+    Center(child: Text('Targets')),
+    SpannableGrid(
+      cells: [
+        SpannableGridCellData(
+          id: 1,
+          column: 1,
+          row: 1,
+          columnSpan: 2,
+          child: Container(
+              child: Center(child: Text("Text 1")),
+              color: Color.fromRGBO(255, 255, 0, 1)),
+        ),
+        SpannableGridCellData(
+            id: 2,
+            column: 1,
+            row: 2,
+            columnSpan: 2,
+            child: Container(
+                child: Center(child: Text("Text 1")),
+                color: Color.fromRGBO(255, 255, 0, 1))),
+        SpannableGridCellData(
+          id: 3,
+          column: 1,
+          row: 3,
+          child: Container(
+              child: Center(child: Text("Text 1")),
+              color: Color.fromRGBO(255, 255, 0, 1)),
+        ),
+        SpannableGridCellData(
+          id: 4,
+          column: 1,
+          row: 4,
+          child: Container(
+              child: Center(child: Text("Text 1")),
+              color: Color.fromRGBO(255, 255, 0, 1)),
+        ),
+        SpannableGridCellData(
+          id: 5,
+          column: 2,
+          row: 3,
+          rowSpan: 2,
+          child: Container(
+              child: Center(child: Text("Text 1")),
+              color: Color.fromRGBO(255, 255, 0, 1)),
+        ),
+      ],
+      columns: 2,
+      rows: 4,
+      style: SpannableGridStyle(
+        spacing: 10,
+      ),
+    ),
+    Center(child: Text('Profile')),
   ];
 
   void _onItemTapped(int index) {
@@ -49,8 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
+          BottomNavigationBarItem(
+              label: "Targets", icon: Icon(Icons.track_changes)),
           BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: "Person", icon: Icon(Icons.person)),
+          BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person))
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
