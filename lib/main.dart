@@ -42,14 +42,96 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+List data = [
+  ['Water', 'Drink at least 2L of water a day', 10, false],
+  ['Instagram', 'Spend less time on instagram', 10, false],
+  ['Sleep', 'Go to sleep to 10pm', 10, false],
+  ['Exercises', 'Do 10 push-ups', 10, true],
+  ['Walking', 'Walk at least 8000 steps', 10, false],
+];
+
+class TaskBox extends StatefulWidget {
+  final taskName;
+  final description;
+  final limit;
+  final isDone;
+
+  const TaskBox({
+    super.key,
+    required this.taskName,
+    required this.description,
+    required this.limit,
+    required this.isDone,
+  });
+
+  @override
+  State<TaskBox> createState() => _TaskBoxState();
+}
+
+class _TaskBoxState extends State<TaskBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: !widget.isDone
+              ? Color.fromRGBO(235, 235, 235, 1)
+              : Color.fromARGB(255, 149, 205, 85),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 25.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                      child: Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 0),
+                      child: Text(
+                        widget.taskName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: !widget.isDone ? Colors.black : Colors.black,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SizedBox(
+                        width: 100,
+                        child: Text(
+                          widget.description,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                            color: !widget.isDone ? Colors.black : Colors.black,
+                          ),
+                        ))
+                  ]))
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
   int counter = 5;
   bool _value = false;
-  int _completed_tasks = 10;
+  int _completed_tasks = 1;
   List<Widget> tasks = [];
   final tasks_progress = [];
-  int _total_tasks = 15;
+  int _total_tasks = 5;
   int _water = 0;
 
   List<Widget> screens = [
@@ -66,65 +148,56 @@ class _MyHomePageState extends State<MyHomePage> {
     Stack()
   ];
 
-  void set_total_tasks() {
-    _total_tasks = tasks.length;
-  }
-
-  void onChanged(value) {
-    setState(() {
-      _value = value;
-      if (value) {
-        _completed_tasks += 1;
-      } else {
-        _completed_tasks -= 1;
-      }
-    });
-  }
-
-  void add_task(task_name, {goal = Null}) {
-    setState(() {
-      ;
-      Row task = Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            task_name,
-            style: TextStyle(color: Colors.black, fontSize: 20),
-          )
-        ],
-      );
-
-      if (goal == Null) {
-        tasks_progress.add(false);
-        task.children.add(Checkbox(value: this._value, onChanged: onChanged));
-      } else {
-        tasks_progress.add(0);
-        task.children.add(CircularPercentIndicator(
-          radius: 60.0,
-          lineWidth: 5.0,
-          percent: 1.0,
-          center: new Text("${tasks_progress[tasks_progress.length]}"),
-          progressColor: Colors.green,
-        ));
-        // task.children.add();
-      }
-      Container t = Container(
-        margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            color: Color.fromRGBO(235, 235, 235, 1),
-            borderRadius: BorderRadius.circular(8)),
-        child: task,
-      );
-      tasks.add(task);
-    });
-  }
-
   void onPressed() {
     setState(() {
-      _total_tasks += 1;
-      add_task("Name");
+      TextEditingController nameField = new TextEditingController();
+      TextEditingController limitField = new TextEditingController();
+      TextEditingController descriptionField = new TextEditingController();
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: const Text("Alert Dialog Box"),
+                content: const Text("You have raised a Alert Dialog Box"),
+                actions: <Widget>[
+                  TextField(
+                    controller: nameField,
+                    autofocus: true,
+                    decoration: new InputDecoration(
+                        labelText: 'Add a task', hintText: 'Task Name'),
+                  ),
+                  TextField(
+                    controller: limitField,
+                    autofocus: true,
+                    decoration: new InputDecoration(hintText: 'Task Limit'),
+                  ),
+                  TextField(
+                    autofocus: true,
+                    controller: descriptionField,
+                    decoration:
+                        new InputDecoration(hintText: 'Task Description'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _total_tasks += 1;
+                      });
+                      Navigator.of(ctx).pop();
+
+                      data.add([
+                        nameField.text,
+                        descriptionField.text,
+                        limitField.text,
+                        false
+                      ]);
+                    },
+                    child: Container(
+                      color: Colors.deepPurple,
+                      padding: const EdgeInsets.all(14),
+                      child: const Text("okay"),
+                    ),
+                  ),
+                ],
+              ));
     });
   }
 
@@ -435,8 +508,23 @@ class _MyHomePageState extends State<MyHomePage> {
             column: 1,
             row: 3,
             rowSpan: 7,
-            child: ListView(
-              children: tasks,
+            child: GridView.builder(
+              itemCount: data.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    // data[index][2] = !data[index][2];
+                    // print(data[index][2]);
+                  },
+                  child: TaskBox(
+                      taskName: data[index][0],
+                      description: data[index][1],
+                      limit: data[index][2],
+                      isDone: data[index][3]),
+                );
+              },
             )),
         SpannableGridCellData(
             id: 4,
@@ -668,6 +756,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           setState(
                             () {
                               _water = _water + 1;
+                              if (_water == 10) {
+                                data[0][3] = true;
+                                _completed_tasks += 1;
+                              }
                             },
                           );
                         },
