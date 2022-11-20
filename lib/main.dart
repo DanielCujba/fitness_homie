@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:spannable_grid/spannable_grid.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'notifications.dart' as LocalNoticeService;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalNoticeService.setup();
   runApp(const MyApp());
 }
 
