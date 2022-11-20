@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:spannable_grid/spannable_grid.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'notifications.dart' as LocalNoticeService;
+import 'test.dart' as Tests;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fitness Homie',
+      title: 'Health Homie',
       theme: ThemeData(
           primarySwatch: Colors.blue,
           appBarTheme: AppBarTheme(
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
             centerTitle: true,
             titleTextStyle: TextStyle(color: Colors.white, fontSize: 30),
           )),
-      home: const MyHomePage(title: 'Fitness Homie'),
+      home: const MyHomePage(title: 'Health Homie'),
     );
   }
 }
@@ -44,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> tasks = [];
   final tasks_progress = [];
   int _total_tasks = 15;
-  int _water = 7;
+  int _water = 0;
 
   List<Widget> screens = [
     SpannableGrid(
@@ -155,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontSize: 20.0,
                       )),
                   Text(
-                    'Boss',
+                    'Experienced User',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15.0,
@@ -287,7 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                           ),
                                           Text(
-                                            "Cats, Basketball, Guitar",
+                                            "Active lifestyle, Healthy BMI",
                                             style: TextStyle(
                                               fontSize: 12.0,
                                               color: Colors.grey[400],
@@ -321,7 +324,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Column(
                     children: [
                       Text(
-                        'Achievements',
+                        'Daily streak',
                         style:
                             TextStyle(color: Colors.grey[400], fontSize: 14.0),
                       ),
@@ -472,37 +475,35 @@ class _MyHomePageState extends State<MyHomePage> {
                       column: 1,
                       row: 1,
                       columnSpan: 4,
-                      child: Container(
-                          child: Center(
-                              child: Text(
-                        "Hello Mihnea!",
-                        style: TextStyle(
-                          fontSize: 35,
-                          fontFamily: "Lato",
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 8,
-                          wordSpacing: 10,
-                        ),
-                      ))),
-                    ),
-                    SpannableGridCellData(
-                      id: 6,
-                      column: 1,
-                      row: 2,
-                      columnSpan: 4,
-                      child: Container(
-                          child: Center(
-                              child: Text(
-                        "Welcome back!",
-                        style: TextStyle(
-                            fontSize: 35,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontStyle: FontStyle.normal,
-                            letterSpacing: 4,
-                            wordSpacing: 5),
-                      ))),
+                      rowSpan: 2,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Hello Dumi,",
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontFamily: "Lato",
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "You're getting close\n to your steps goal!",
+                            style: TextStyle(
+                              fontSize: 35,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontStyle: FontStyle.normal,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     SpannableGridCellData(
                         id: 7,
@@ -519,8 +520,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("data1"),
-                                  Text("data2"),
+                                  Text("Steps\ncounter"),
+                                  Text("Target\n   8k"),
                                 ],
                               ),
                             ),
@@ -530,13 +531,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(
                               child: LinearPercentIndicator(
                                 alignment: MainAxisAlignment.center,
-                                width: MediaQuery.of(context).size.width * 0.8,
+                                width: MediaQuery.of(context).size.width * 0.86,
                                 animation: true,
                                 lineHeight: 20.0,
                                 animationDuration: 2500,
-                                percent: 0.8,
+                                percent: 0.75,
                                 barRadius: const Radius.circular(16),
-                                center: Text("80.0%"),
+                                center: Text("75.0%"),
                                 progressColor: Colors.deepPurple,
                               ),
                             ),
@@ -565,13 +566,44 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Flex(
                 direction: Axis.vertical,
                 children: [
-                  Expanded(flex: 1, child: Center(child: Text("Hours Used"))),
                   Expanded(
                       flex: 1,
-                      child: Center(
+                      child: Container(
+                          child: Text(
+                        "\nScreen Time",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500),
+                      ))),
+                  Expanded(
+                      flex: 1,
+                      child: Container(
                           child: Flex(
                         direction: Axis.vertical,
-                        children: [Text("12 hrs"), Text("6hrs total")],
+                        children: [
+                          new CircularPercentIndicator(
+                            radius: 35.0,
+                            lineWidth: 10.0,
+                            percent: 0.2,
+                            center: new Text(
+                              "8/6\nhrs",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                              ),
+                            ),
+                            progressColor: Colors.red,
+                            backgroundColor: Colors.green,
+                          )
+                          // Text(
+                          //   "  8/6 hrs\nDaily limit\nexceeded",
+                          //   style: TextStyle(
+                          //     color: Colors.red,
+                          //     fontSize: 20,
+                          //   ),
+                          // )
+                        ],
                       ))),
                 ],
               ))),
@@ -592,7 +624,13 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Flex(
                 direction: Axis.vertical,
                 children: [
-                  Expanded(flex: 1, child: Center(child: Text('data'))),
+                  Expanded(
+                      flex: 1,
+                      child: Center(
+                          child: Text(
+                        'Daily Hydration',
+                        style: TextStyle(fontSize: 19),
+                      ))),
                   Expanded(
                       flex: 1,
                       child: Center(
@@ -606,7 +644,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             lineHeight: 35.0,
                             animationDuration: 1000,
                             percent: 0.1 * _water,
-                            progressColor: Color.fromARGB(255, 58, 79, 183),
+                            progressColor: Color.fromARGB(255, 0, 141, 223),
                           ),
                           Image(
                             image: AssetImage("paharPB.png"),
@@ -628,8 +666,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             },
                           );
                         },
+                        // ignore: prefer_const_constructors
                         child: Text(
-                          'TextButton',
+                          'Drank some water!',
+                          style: TextStyle(fontSize: 15),
                         ),
                       )))
                 ],
