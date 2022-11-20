@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             centerTitle: true,
-            titleTextStyle: TextStyle(color: Colors.white, fontSize: 30),
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+            ),
           )),
       home: const MyHomePage(title: 'Health Homie'),
     );
@@ -41,7 +44,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 1;
-  int counter = 0;
+  int counter = 5;
   bool _value = false;
   int _completed_tasks = 10;
   List<Widget> tasks = [];
@@ -534,10 +537,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                 width: MediaQuery.of(context).size.width * 0.86,
                                 animation: true,
                                 lineHeight: 20.0,
-                                animationDuration: 2500,
-                                percent: 0.75,
+                                animationDuration: 1000,
+                                percent: 0.724,
                                 barRadius: const Radius.circular(16),
-                                center: Text("75.0%"),
+                                center: Text("72.4%"),
                                 progressColor: Colors.deepPurple,
                               ),
                             ),
@@ -569,13 +572,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                       flex: 1,
                       child: Container(
-                          child: Text(
-                        "\nScreen Time",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500),
-                      ))),
+                        child: Text(
+                          "\nScreen Time",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      )),
                   Expanded(
                       flex: 1,
                       child: Container(
@@ -585,7 +589,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           new CircularPercentIndicator(
                             radius: 35.0,
                             lineWidth: 10.0,
-                            percent: 0.2,
+                            percent: 0.33,
+                            animateFromLastPercent: true,
                             center: new Text(
                               "8/6\nhrs",
                               style: TextStyle(
@@ -610,8 +615,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         SpannableGridCellData(
           id: 3,
-          column: 1,
-          row: 6,
+          column: 3,
+          row: 4,
           columnSpan: 2,
           rowSpan: 2,
           child: Container(
@@ -677,12 +682,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         SpannableGridCellData(
           id: 4,
-          column: 3,
-          row: 4,
-          rowSpan: 4,
-          columnSpan: 2,
+          column: 1,
+          row: 6,
+          rowSpan: 2,
+          columnSpan: 4,
           child: Container(
-            child: Center(child: Text("Text 4")),
+            child: Center(
+                child: Text(
+              "Quote of the day\n\n“A healthy outside starts from the inside.”\n\n   – Robert Urich – \n",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 15),
+            )),
             decoration: BoxDecoration(
                 border: Border.all(
                     width: 5, color: Color.fromARGB(255, 115, 115, 130)),
