@@ -43,9 +43,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 List data = [
-  ['Water', 'Drink at least 2L of water a day', 10, false],
+  ['Water', 'Drink at least 2L of water', 10, false],
   ['Instagram', 'Spend less time on instagram', 10, false],
-  ['Sleep', 'Go to sleep to 10pm', 10, false],
+  ['Sleep', 'Go to sleep at 10pm', 10, false],
   ['Exercises', 'Do 10 push-ups', 10, true],
   ['Walking', 'Walk at least 8000 steps', 10, false],
 ];
