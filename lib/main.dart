@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             centerTitle: true,
-            titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 30),
           )),
       home: const MyHomePage(title: 'Fitness Homie'),
     );
@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> tasks = [];
   final tasks_progress = [];
   int _total_tasks = 15;
+  int _water = 7;
 
   final screens = [];
 
@@ -449,59 +450,211 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void create_home_page() {
     setState(() {
-      screens.add(
-        SpannableGrid(
-          cells: [
-            SpannableGridCellData(
+      screens.add(SpannableGrid(
+        cells: [
+          SpannableGridCellData(
               id: 1,
               column: 1,
               row: 1,
-              columnSpan: 2,
+              columnSpan: 4,
+              rowSpan: 3,
               child: Container(
-                  child: Center(child: Text("Text 1")),
-                  color: Color.fromRGBO(255, 255, 0, 1)),
-            ),
-            SpannableGridCellData(
-                id: 2,
-                column: 1,
-                row: 2,
-                columnSpan: 2,
-                child: Container(
-                    child: Center(child: Text("Text 1")),
-                    color: Color.fromRGBO(255, 255, 0, 1))),
-            SpannableGridCellData(
-              id: 3,
-              column: 1,
-              row: 3,
-              child: Container(
-                  child: Center(child: Text("Text 1")),
-                  color: Color.fromRGBO(255, 255, 0, 1)),
-            ),
-            SpannableGridCellData(
-              id: 4,
-              column: 1,
-              row: 4,
-              child: Container(
-                  child: Center(child: Text("Text 1")),
-                  color: Color.fromRGBO(255, 255, 0, 1)),
-            ),
-            SpannableGridCellData(
-              id: 5,
-              column: 2,
-              row: 3,
-              rowSpan: 2,
-              child: Container(
-                  child: Center(child: Text("Text 1")),
-                  color: Color.fromRGBO(255, 255, 0, 1)),
-            ),
-          ],
-          columns: 2,
-          rows: 4,
-          style: SpannableGridStyle(
-            spacing: 10,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 5, color: Color.fromARGB(255, 115, 115, 130)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      color: Color.fromRGBO(240, 240, 240, 1)),
+                  child: SpannableGrid(
+                    cells: [
+                      SpannableGridCellData(
+                        id: 5,
+                        column: 1,
+                        row: 1,
+                        columnSpan: 4,
+                        child: Container(
+                            child: Center(
+                                child: Text(
+                          "Hello Mihnea!",
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontFamily: "Lato",
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 8,
+                            wordSpacing: 10,
+                          ),
+                        ))),
+                      ),
+                      SpannableGridCellData(
+                        id: 6,
+                        column: 1,
+                        row: 2,
+                        columnSpan: 4,
+                        child: Container(
+                            child: Center(
+                                child: Text(
+                          "Welcome back!",
+                          style: TextStyle(
+                              fontSize: 35,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontStyle: FontStyle.normal,
+                              letterSpacing: 4,
+                              wordSpacing: 5),
+                        ))),
+                      ),
+                      SpannableGridCellData(
+                          id: 7,
+                          column: 1,
+                          row: 3,
+                          columnSpan: 4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("data1"),
+                                    Text("data2"),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              SizedBox(
+                                child: LinearPercentIndicator(
+                                  alignment: MainAxisAlignment.center,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  animation: true,
+                                  lineHeight: 20.0,
+                                  animationDuration: 2500,
+                                  percent: 0.8,
+                                  barRadius: const Radius.circular(16),
+                                  center: Text("80.0%"),
+                                  progressColor: Colors.deepPurple,
+                                ),
+                              ),
+                            ],
+                          ))
+                    ],
+                    columns: 4,
+                    rows: 3,
+                    style: SpannableGridStyle(
+                      spacing: 0,
+                    ),
+                  ))),
+          SpannableGridCellData(
+            id: 2,
+            column: 1,
+            row: 4,
+            columnSpan: 2,
+            rowSpan: 2,
+            child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        width: 5, color: Color.fromARGB(255, 115, 115, 130)),
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    color: Color.fromRGBO(240, 240, 240, 1)),
+                child: Center(
+                    child: Flex(
+                  direction: Axis.vertical,
+                  children: [
+                    Expanded(flex: 1, child: Center(child: Text("Hours Used"))),
+                    Expanded(
+                        flex: 1,
+                        child: Center(
+                            child: Flex(
+                          direction: Axis.vertical,
+                          children: [Text("12 hrs"), Text("6hrs total")],
+                        ))),
+                  ],
+                ))),
           ),
+          SpannableGridCellData(
+            id: 3,
+            column: 1,
+            row: 6,
+            columnSpan: 2,
+            rowSpan: 2,
+            child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        width: 5, color: Color.fromARGB(255, 115, 115, 130)),
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    color: Color.fromRGBO(240, 240, 240, 1)),
+                alignment: Alignment.center,
+                child: Flex(
+                  direction: Axis.vertical,
+                  children: [
+                    Expanded(flex: 1, child: Center(child: Text('data'))),
+                    Expanded(
+                        flex: 1,
+                        child: Center(
+                            child: Stack(
+                          children: [
+                            LinearPercentIndicator(
+                              alignment: MainAxisAlignment.center,
+                              width: 160,
+                              animation: true,
+                              animateFromLastPercent: true,
+                              lineHeight: 35.0,
+                              animationDuration: 1000,
+                              percent: 0.1 * _water,
+                              progressColor: Color.fromARGB(255, 58, 79, 183),
+                            ),
+                            Image(
+                              image: AssetImage("paharPB.png"),
+                            ),
+                          ],
+                        ))),
+                    Expanded(
+                        flex: 1,
+                        child: Center(
+                            child: TextButton(
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                                Colors.deepPurple),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _water = _water + 1;
+                            });
+                          },
+                          child: Text(
+                            'TextButton',
+                          ),
+                        )))
+                  ],
+                )),
+          ),
+          SpannableGridCellData(
+            id: 4,
+            column: 3,
+            row: 4,
+            rowSpan: 4,
+            columnSpan: 2,
+            child: Container(
+              child: Center(child: Text("Text 4")),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      width: 5, color: Color.fromARGB(255, 115, 115, 130)),
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  color: Color.fromRGBO(240, 240, 240, 1)),
+            ),
+          ),
+        ],
+        columns: 4,
+        rows: 7,
+        style: SpannableGridStyle(
+          spacing: 10,
         ),
-      );
+      ));
     });
   }
 
@@ -540,6 +693,7 @@ class _MyHomePageState extends State<MyHomePage> {
               BottomNavigationBarItem(
                   label: "Profile", icon: Icon(Icons.person))
             ],
+            selectedItemColor: Colors.deepPurple,
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
           ),
