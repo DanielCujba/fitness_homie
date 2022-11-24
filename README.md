@@ -1,16 +1,16 @@
-# fitness_homie
+# Health_homie
 
-A new Flutter project.
+Our Hackathon Project
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a personal assistant for your physical and mental health.
 
-A few resources to get you started if this is your first Flutter project:
+In order to run the application you should open lib/main.dart that's where all the spaghetti code is stored
+More information can be seen in the Presentation.pptx
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Our team: 
+Dumitrana Mihnea Ioan
+Cujba Daniel
+Cristea Octavian
