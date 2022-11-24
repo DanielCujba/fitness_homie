@@ -6,11 +6,12 @@
 
 This project is a personal assistant for your physical and mental health.
 
-In order to run the application you should open lib/main.dart that's where all the spaghetti code is stored
+In order to run the application you should open lib/main.dart that's where all the spaghetti code is stored<br>
 More information can be seen in the Presentation.pptx
 
 
-Our team: 
-Dumitrana Mihnea Ioan
-Cujba Daniel
-Cristea Octavian
+Our team: <br>
+Dumitrana Mihnea Ioan <br>
+Cujba Daniel <br>
+Cristea Octavian<br>
+
