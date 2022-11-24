@@ -1,6 +1,6 @@
 # Health_homie
 
-Our Hackathon Project
+🥳 Our 24 hour Hackathon Project 🥳
 
 ## Getting Started
 
